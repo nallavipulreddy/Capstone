@@ -138,14 +138,3 @@ color:#fff;
         background-attachment: scroll;
     }
 }
-.team
-{
-    background-image: url("https://images3.alphacoders.com/427/thumb-1920-42785.jpg");
-    min-height: 100%;
-    position: relative;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-blend-mode: screen;
-}  

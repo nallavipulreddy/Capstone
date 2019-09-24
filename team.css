@@ -1,0 +1,74 @@
+html {
+    box-sizing: content-box;
+}
+  *, *:before, *:after {
+    box-sizing: inherit;
+}
+.row{
+    width:99%;
+    margin-left: 10px;
+    padding-left: 10px;
+}
+.column {
+    width: 30%;
+    margin-left: 16px;
+    margin-bottom: 16px;
+    padding: 10px 8px;
+}
+
+@media screen and (max-width: 650px) {
+    .column {
+    width: 100%;
+    display: block;
+    }
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: white;
+}
+
+.container {
+    padding: 0 16px;
+}
+
+.container::after, .row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+h2{
+    color: black;
+}
+.title {
+    color: grey;
+}
+button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+a {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+}
+
+button:hover, a:hover {
+    opacity: 0.7;
+}  
+
+.team
+{
+    font-family:Verdana;
+    font-size: 30px;
+    background-color:gray;
+}  
