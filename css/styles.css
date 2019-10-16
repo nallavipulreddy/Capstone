@@ -4,9 +4,9 @@ hr{border:1px dotted blue}
 
 .topnav {
     text-align:center;
-    color:black;
+    color:white;
     font-family:Verdana;
-    background-color: #F1EA7F;
+    background-color: black;
     overflow: hidden;
     padding:1px 5px;
     font-size:30px;
@@ -14,10 +14,16 @@ hr{border:1px dotted blue}
 
 .table {
     overflow: hidden;
+    table-layout: fixed;
+    width:100%;
+}
+td
+{
+width: 20%;
 }
 .topnav a {
     display: block;
-    color: black;
+    color: white;
     text-align: center;
     border-radius: 8px;
     padding: 14px 16px;
@@ -138,3 +144,32 @@ color:#fff;
         background-attachment: scroll;
     }
 }
+
+/*======================DropDown=================*/
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: black;
+  color:white;
+  min-width: 265px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+
+.dropdown-content a:hover {background-color: orange;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/*..................Sign*/
