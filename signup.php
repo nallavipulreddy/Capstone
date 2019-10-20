@@ -1,48 +1,4 @@
-<?php
-//Database Configuration File
-include('config.php');
-error_reporting(0);
-if(isset($_POST['submit']))
-{
-//Getting Post Values
-$username=$_POST['username'];
-$email=$_POST['email'];
-$password=md5($_POST['password']);
-// Query for validation of username and email-id
-$ret="SELECT * FROM users where (name=:uname ||  email=:uemail)";
-$queryt = $dbh -> prepare($ret);
-$queryt->bindParam(':uemail',$email,PDO::PARAM_STR);
-$queryt->bindParam(':uname',$username,PDO::PARAM_STR);
-$queryt -> execute();
-$results = $queryt -> fetchAll(PDO::FETCH_OBJ);
-if($queryt -> rowCount() == 0)
-{
-// Query for Insertion
-$sql="INSERT INTO users(name,email,Password) VALUES(:uname,:uemail,:upassword)";
-$query = $dbh->prepare($sql);
-// Binding Post Values
-$query->bindParam(':uname',$username,PDO::PARAM_STR);
-$query->bindParam(':uemail',$email,PDO::PARAM_STR);
-$query->bindParam(':upassword',$password,PDO::PARAM_STR);
-$query->execute();
-$lastInsertId = $dbh->lastInsertId();
-if($lastInsertId)
-{
-$msg="You have signup  Scuccessfully";
-}
-else
-{
-$error="Something went wrong.Please try again";
-}
-}
-else
-{
-$error="Username or Email-id already exist. Please try again";
-}
-}
-?>
-
-
+<?php include 'dbh.php'?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,64 +14,18 @@ $error="Username or Email-id already exist. Please try again";
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
 
-<!--Javascript for check username availability-->
-<script>
-function checkUsernameAvailability() {
-$("#loaderIcon").show();
-jQuery.ajax({
-url: "check.php",
-data:'username='+$("#username").val(),
-type: "POST",
-success:function(data){
-$("#username-availability-status").html(data);
-$("#loaderIcon").hide();
-},
-error:function (){
-}
-});
-}
-</script>
-<!--Javascript for check email availability-->
-<script>
-function checkEmailAvailability() {
-$("#loaderIcon").show();
-jQuery.ajax({
-url: "check.php",
-data:'email='+$("#email").val(),
-type: "POST",
-success:function(data){
-$("#email-availability-status").html(data);
-$("#loaderIcon").hide();
-},
-error:function (){
-event.preventDefault();
-}
-});
-}
-</script>
-
 
 <style type="text/css">
-.errorWrap {
-    padding: 10px;
-    margin: 0 0 20px 0;
-    background: #fff;
-    border-left: 4px solid #dd3d36;
-    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-}
-.succWrap{
-    padding: 10px;
-    margin: 0 0 20px 0;
-    background: #fff;
-    border-left: 4px solid #5cb85c;
-    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-}
-
 	body{
 		color: #fff;
-		background: #63738a;
+		background-image: url("https://images3.alphacoders.com/427/thumb-1920-42785.jpg");
+		position: relative;
+    	background-attachment: fixed;
+    	background-position: center;
+    	background-repeat: no-repeat;
+		background-size: cover;
+		min-height: 100%;
+		
 		font-family: 'Roboto', sans-serif;
 	}
     .form-control{
@@ -164,7 +74,7 @@ event.preventDefault();
 		color: #999;
 		border-radius: 3px;
     	margin-bottom: 15px;
-        background: black;
+        background: beige;
         box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
         padding: 30px;
     }
@@ -217,17 +127,18 @@ event.preventDefault();
     <form action="" method="post">
 		<h2>Sign Up</h2>
 		<p class="hint-text">Create your account Today. It takes only  a minute.</p>
-<!--Error Message-->
-		<?php if($error){ ?><div class="errorWrap">
-                <strong>Error </strong> : <?php echo htmlentities($error);?></div>
-                <?php } ?>
-<!--Success Message-->
-<?php if($msg){ ?><div class="succWrap">
-                <strong>Well Done </strong> : <?php echo htmlentities($msg);?></div>
-                <?php } ?>
-
+<?php if (count($errors) > 0): ?>
+  <div class="alert alert-danger">
+    <?php foreach ($errors as $error): ?>
+    <li>
+      <?php echo $error; ?>
+    </li>
+    <?php endforeach;?>
+  </div>
+<?php endif;?>
         <div class="form-group">
-			<input type="text" class="form-control" name="username" placeholder="UserName" required="required">        	
+			<input type="text" class="form-control" name="username" placeholder="UserName" required="required" onBlur="checkUsernameAvailability()"  pattern="[a-zA-Z\s]+">
+			<span id="username-availability-status" style="font-size:12px;"></span>        	
         </div>
         <div class="form-group">
         	<input type="email" class="form-control" name="email" placeholder="Email" required="required">
@@ -236,13 +147,13 @@ event.preventDefault();
             <input type="password" class="form-control" name="password" placeholder="Password" required="required">
         </div>
 		<div class="form-group">
-            <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required">
+            <input type="password" class="form-control" name="passwordConf" placeholder="Confirm Password" required="required">
         </div>        
         <div class="form-group">
 			<label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
 		</div>
 		<div class="form-group">
-            <button type="submit" name="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
+            <button type="submit" name="submit" class="btn btn-success btn-lg btn-block">Sign Up</button>
         </div>
     <div class="text-center">Already have an account? <a href="login.php">Login</a></div>
 	</form>

@@ -1,21 +1,12 @@
+<?php include 'dbh.php'?>
 <?php
-session_start();
-include('config.php');
-// Validating Session
-if(strlen($_SESSION['userlogin'])!=0)
-{
-header('location:login.php');
+// redirect user to login page if they're not logged in
+if (empty($_SESSION['id'])) {
+    header('location: login.php');
 }
+$display=$_SESSION['username'];
 ?>
-<?php
-// Code for fecthing user full name on the bassis of username or email.
-$username=$_SESSION['userlogin'];
-$query=$dbh->prepare("SELECT  name FROM users WHERE (name=:username)");
-    $query->execute(array(':username'=> $username));
-    while($row=$query->fetch(PDO::FETCH_ASSOC)){
-        $username=$row['name'];
-    }
-?>
+
 <html>
 <title>Main</title>
 <head>
@@ -50,9 +41,9 @@ function myFunction() {
                 <a href="#">Water Pump</a>
                 </td>
                 <td class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Profile</a>
+                <a href="javascript:void(0)" class="dropbtn">Account</a>
                     <div class="dropdown-content">
-                        <a href="#"><?php echo $username;?></a>
+                        <a href="#"><?php echo $display;?></a>
                         <a href="#">Help</a>
                         <a href="logout.php">Logout</a>
                     </div>
@@ -60,6 +51,12 @@ function myFunction() {
                 
             </tr>
         </table>
+    </div>
+    <div class="caption">
+      <span class="border">"Welcome <?php echo $display;?>"</span>
+      <br>
+      <br>
+      <span class="border">"You Are smart to choose smartty-farm"</span>
     </div>
 </div>
 

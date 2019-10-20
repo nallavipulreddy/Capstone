@@ -1,30 +1,4 @@
-<?php
-  session_start();
-//Database Configuration File
-include('config.php');
-error_reporting(0);
-if(isset($_POST['login']))
-{
-    // Getting username/ email and password
-    $uemail=$_POST['email'];
-    $password=md5($_POST['password']);
-    // Fetch data from database on the basis of username/email and password
-    $sql ="SELECT name,email,password FROM users WHERE (email=:uemail) and (password=:upassword)";
-    $query= $dbh -> prepare($sql);
-    $query-> bindParam(':uemail', $uemail, PDO::PARAM_STR);
-    $query-> bindParam(':upassword', $password, PDO::PARAM_STR);
-    $query-> execute();
-    $results=$query->fetchAll(PDO::FETCH_OBJ);
-if($query->rowCount() > 0)
-{
-    $_SESSION['userlogin']=$_POST['username'];
-    echo "<script type='text/javascript'> document.location = 'Main.php'; </script>";
-} else{
-    echo "<script>alert('Invalid Details');</script>";
-}
-}
-?>
-
+<?php include 'dbh.php'?>
 
 
 <!DOCTYPE html>
@@ -36,6 +10,10 @@ if($query->rowCount() > 0)
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 <title>Sign In</title>
+
+
+
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -43,7 +21,13 @@ if($query->rowCount() > 0)
 <style type="text/css">
 	body{
 		color: #fff;
-		background: #63738a;
+		background-image: url("https://images3.alphacoders.com/427/thumb-1920-42785.jpg");
+		position: relative;
+    	background-attachment: fixed;
+    	background-position: center;
+    	background-repeat: no-repeat;
+		background-size: cover;
+		min-height: 100%;
 		font-family: 'Roboto', sans-serif;
 	}
     .form-control{
@@ -92,7 +76,7 @@ if($query->rowCount() > 0)
 		color: #999;
 		border-radius: 3px;
     	margin-bottom: 15px;
-        background: black;
+        background: beige;
         box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
         padding: 30px;
     }
@@ -145,19 +129,27 @@ if($query->rowCount() > 0)
     <form action="" method="post">
 		<h2>Sign In</h2>
 		<p class="hint-text">Welcome to Login page</p>
+				<?php if (count($errors) > 0): ?>
+			  		<div class="alert alert-danger">
+			    		<?php foreach ($errors as $error): ?>
+			    		<li>
+			    		  <?php echo $error; ?>
+			    		</li>
+			    	<?php endforeach;?>
+			 		 </div>
+					<?php endif;?>
         <div class="form-group">
-			<div class="row">
-
-        <div class="form-group">
-        	<input type="email" class="form-control" name="email" placeholder="Email" required="required">
-        </div>
-		<div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
-        </div>
 		
-		<div class="form-group">
-            <button type="submit" name="login"class="btn btn-success btn-lg btn-block">Log In</button>
-        </div>
+        		<div class="form-group">
+        			<input type="text" name="username" class="form-control" placeholder="Username Or Email" required="required">
+        		</div>
+				<div class="form-group">
+            	<input type="password" class="form-control" name="password" placeholder="Password" required="required">
+        		</div>
+		
+				<div class="form-group">
+            		<button type="submit" name="login"class="btn btn-success btn-lg btn-block">Log In</button>
+        		</div>
     </form>
 	
 <div class="modal-footer">
