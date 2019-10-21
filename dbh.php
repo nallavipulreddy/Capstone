@@ -6,7 +6,7 @@ $errors = [];
 
 $conn = new mysqli('localhost', 'root', '', 'test1');
 
-// SIGN UP USER
+// Signup User
 if (isset($_POST['submit'])) {
     if (empty($_POST['username'])) {
         $errors['username'] = 'Username required';
@@ -32,9 +32,8 @@ if (isset($_POST['submit'])) {
     if (mysqli_num_rows($result) > 0) {
         $errors['email'] = "Email already exists";
     }
-
     if (count($errors) === 0) {
-        $query = "INSERT INTO users SET username=?, email=?, token=?, password=?";
+       $query = "INSERT INTO users SET username=?, email=?, token=?, password=?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param('ssss', $username, $email, $token, $password);
         $result = $stmt->execute();
@@ -52,13 +51,14 @@ if (isset($_POST['submit'])) {
             $_SESSION['verified'] = false;
             $_SESSION['message'] = 'You are logged in!';
             $_SESSION['type'] = 'alert-success';
-            header('location: index.php');
+            echo "<script>alert('Registration successfull.');</script>";
+            echo "<script>window.location.href='login.php'</script>";
         } else {
             $_SESSION['error_msg'] = "Database error: Could not register user";
         }
+
     }
 }
-
 // LOGIN
 if (isset($_POST['login'])) {
     if (empty($_POST['username'])) {
@@ -87,7 +87,8 @@ if (isset($_POST['login'])) {
                 $_SESSION['verified'] = $user['verified'];
                 $_SESSION['message'] = 'You are logged in!';
                 $_SESSION['type'] = 'alert-success';
-                header('location: main.php');
+                echo "<script>alert('Login successfull.');</script>";
+                echo "<script>window.location.href='main.php'</script>";
                 exit(0);
             } else { // if password does not match
                 $errors['login_fail'] = "Wrong username / password";

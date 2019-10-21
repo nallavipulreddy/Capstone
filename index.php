@@ -39,20 +39,11 @@ function myFunction() {
             </tr>
         </table>
     </div>
-</div>
-  
-  <div style="position:relative;">
-    <div style="color:#ddd;background-color:#282E34;text-align:center;padding:10px 10px;text-align: justify;">
-      <p style="text-align:center">Scroll up and down to really get the experience of Farming</p>
-    </div>
-  </div>    
-  
-  
-  
-  <div class="bgimg-3">
     <div class="caption">
-      <span class="border">"Farming is not a job it's a way of Living"</span>
+      <span class="border">"Home Page"</span>
     </div>
-  </div>
-  </body>
-  </html>
+</div>
+
+
+</body>
+</html>

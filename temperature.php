@@ -34,30 +34,11 @@ function myFunction() {
 }
 </script>
 
-<script>
-function openPage(pageName,elmnt,color) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablink");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].style.backgroundColor = "";
-  }
-  document.getElementById(pageName).style.display = "block";
-  elmnt.style.backgroundColor = color;
-}
-
-// Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
-</script>
-
 
 </head>
 <body>
 
-<div class="bgimg-1">
+<div >
     <div class="topnav">
         <table width="100%">
             <tr>
@@ -73,7 +54,7 @@ document.getElementById("defaultOpen").click();
                 <td class="dropdown">
                 <a class="dropbtn">Account</a>
                     <div class="dropdown-content">
-                        <a href="#"><?php echo $display;?></a>
+                        <a href="main.php"><?php echo $display;?></a>
                         <a href="#">Help</a>
                         <a href="logout.php">Logout</a>
                     </div>
@@ -82,13 +63,11 @@ document.getElementById("defaultOpen").click();
             </tr>
         </table>
     </div>
-    <div class="caption">
-      <span class="border">"Welcome <?php echo $display;?>"</span>
-      <br>
-      <br>
-      <span class="border">"You Are smart to choose smartty-farm"</span>
-    </div>
 </div>
+    <div >
+      <h3>Temperature</h3>
+      <p>Temperature is where the heart is..</p>
+    </div>
 
 
 
