@@ -11,8 +11,9 @@ if(isset($_POST['Submit']))
 {
 	$username=$_POST['username'];
   $auth_key=$_POST['auth_key'];
+  $channel_id=$_POST['channel_id'];
   $uid=intval($_GET['uid']);
-$query=mysqli_query($con,"update users set username='$username' where id='$uid'");
+$query=mysqli_query($con,"update users set username='$username',auth_key='$auth_key',channel_id='$channel_id' where id='$uid'");
 $_SESSION['msg']="Profile Updated successfully";
 }
 ?>
@@ -100,6 +101,13 @@ $_SESSION['msg']="Profile Updated successfully";
                               <label class="col-sm-2 col-sm-2 control-label" style="padding-left:40px;">User Name </label>
                               <div class="col-sm-10">
                                   <input type="text" class="form-control" name="username" value="<?php echo $row['username'];?>" >
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label" style="padding-left:40px;">Channel_id </label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" name="channel_id" value="<?php echo $row['channel_id'];?>" >
                               </div>
                           </div>
                           

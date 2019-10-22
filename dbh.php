@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
             $_SESSION['message'] = 'You are logged in!';
             $_SESSION['type'] = 'alert-success';
             echo "<script>alert('Registration successfull.');</script>";
-            echo "<script>window.location.href='login.php'</script>";
+            header("location: login.php");
         } else {
             $_SESSION['error_msg'] = "Database error: Could not register user";
         }
@@ -85,10 +85,11 @@ if (isset($_POST['login'])) {
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['verified'] = $user['verified'];
+                $_SESSION['channel_id']=$user['channel_id'];
+                $_SESSION['auth_key']=$user['auth_key'];
                 $_SESSION['message'] = 'You are logged in!';
                 $_SESSION['type'] = 'alert-success';
-                echo "<script>alert('Login successfull.');</script>";
-                echo "<script>window.location.href='main.php'</script>";
+                header("location: main.php");
                 exit(0);
             } else { // if password does not match
                 $errors['login_fail'] = "Wrong username / password";

@@ -5,6 +5,8 @@ if (empty($_SESSION['id'])) {
     header('location: login.php');
 }
 $display=$_SESSION['username'];
+$channel=$_SESSION['channel_id'];
+$auth=$_SESSION['auth_key'];
 ?>
 
 <html>
@@ -38,7 +40,7 @@ function myFunction() {
 </head>
 <body>
 
-<div >
+<div style="background-color: black">
     <div class="topnav">
         <table width="100%">
             <tr>
@@ -64,9 +66,14 @@ function myFunction() {
         </table>
     </div>
 </div>
-    <div >
-      <h3>Soil-Moisture</h3>
-      <p>Soil-Moisture is where the heart is..</p>
+    <div>
+
+
+        <iframe width="450" height="260" style="border: 1px solid #cccccc;margin-left: 150px;margin-top: 150px;" src="https://thingspeak.com/channels/890855/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&api_key='.$auth_key.'&results=60&type=line&update=15"></iframe>
+
+        <iframe width="450" height="260" style="border: 1px solid #cccccc;margin-left: 100px;margin-top: 150px;" src="https://thingspeak.com/channels/890855/widgets/111517"></iframe>
+
+
     </div>
 
 

@@ -96,6 +96,7 @@ echo "<script>alert('Data deleted');</script>";
                                   <th>Sno.</th>
                                   <th class="hidden-phone">User Name</th>
                                   <th> Email Id</th>
+                                  <th> Channel Id</th>
                                   <th> Authentication key</th>
                                   <th>Reg. Date</th>
                               </tr>
@@ -109,6 +110,7 @@ echo "<script>alert('Data deleted');</script>";
                               <td><?php echo $cnt;?></td>
                                   <td><?php echo $row['username'];?></td>
                                   <td><?php echo $row['email'];?></td>
+                                  <td><?php echo $row['channel_id'];?></td>
                                   <td><?php echo $row['auth_key'];?></td>
                                   <td><?php echo $row['Date'];?></td>
                                   <td>
