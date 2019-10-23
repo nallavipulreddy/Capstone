@@ -3,3 +3,13 @@
       <p style="text-align:center">Scroll up and down to really get the experience of Farming</p>
     </div>
   </div>    
+
+
+
+
+        <h3>PHP Email Verification Script </h3>
+		<hr >
+	<p><?php echo htmlentities($msg);?></p>
+   <p> Now you can login</p>
+   <p>For login <a href="login.php">Click Here</a></p>
+  
