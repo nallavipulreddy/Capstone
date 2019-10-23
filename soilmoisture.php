@@ -24,6 +24,29 @@ $auth=$_SESSION['auth_key'];
   padding: 100px 20px;
   height: 409px;
 }
+.container-block
+{
+    border-radius: 2px;
+    padding: 20px 40px 20px 40px;
+    border-radius: 10px;
+    margin-left: 500px;
+    text-align:center;
+    font-size: 15px;
+    color:white;
+    background-color: black;
+    display: inline-block;
+    border: 1px white solid;
+
+}
+.container-block:hover
+{
+    background-color: orange;
+    color:black;
+}
+.container-block1
+{
+    margin:50px 220px;
+}
 </style>
 <script>
 /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
@@ -83,15 +106,17 @@ function myFunction() {
 
 
         echo'<div style="background-color:black;width: 100%;position: absolute;top: 55px;bottom:0;overflow:hidden">
-        <div style="text-align:center;color:white">
-            <p>Channel id:'.$data->channel->id.'</p>
+        <div class="container-block">
+            <p><b>Channel id:</b>'.$data->channel->id.'</p>
             <p>Created At:'.date($data->channel->created_at).'</p>
             <p>Updated At:'.date($data->channel->updated_at).'</p>
             <p>Last entry Id:'.($data->channel->last_entry_id).'</p>
         </div>
-        <iframe width="450" height="260" style="border: 1px solid #cccccc;margin:50px 120px;" src="https://thingspeak.com/channels/'.$ses.'/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+        <div class="container-block1">
+            <iframe width="450" height="260" src="https://thingspeak.com/channels/'.$ses.'/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
 
-        <iframe width="450" height="260" style="border: 1px solid #cccccc;margin:50px 100px;" src="https://thingspeak.com/channels/'.$ses.'/widgets/111517"></iframe>
+            <iframe width="450" height="260" src="https://thingspeak.com/channels/'.$ses.'/widgets/111517"></iframe>
+        </div>
 
     </div>';   
     }
