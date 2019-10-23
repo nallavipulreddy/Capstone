@@ -38,7 +38,7 @@ function myFunction() {
 </head>
 <body>
 
-<div >
+<div>
     <div class="topnav">
         <table width="100%">
             <tr>
@@ -64,11 +64,16 @@ function myFunction() {
         </table>
     </div>
 </div>
-    <div >
-      <h3>Temperature</h3>
-      <p>Temperature is where the heart is..</p>
-    </div>
-
+<!.......................................HERE.......................................>
+    <?php
+        $ch=curl_init();
+        $url="https://api.thingspeak.com/channels/".$ses."/fields/1.json?api_key=".$auth."&results=2";
+        curl_setopt($ch, CURLOPT_URL , $url);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $response=curl_exec($ch);
+        $data=json_decode($response);
+    ?>
 
 
 </body>

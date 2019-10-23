@@ -1,5 +1,6 @@
 <?php include 'dbh.php'?>
 <?php
+date_default_timezone_set("Asia/Kolkata");
 // redirect user to login page if they're not logged in
 if (empty($_SESSION['id'])) {
     header('location: login.php');
@@ -66,15 +67,51 @@ function myFunction() {
         </table>
     </div>
 </div>
-    <div>
+    <?php
+    if($_SESSION['channel_id']!=0)
+    {
+        $ses=$_SESSION['channel_id'];
+        $auth=$_SESSION['auth_key'];
+        $ch=curl_init();
+        $url="https://api.thingspeak.com/channels/".$ses."/fields/1.json?api_key=".$auth."&results=2";
+        curl_setopt($ch, CURLOPT_URL , $url);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $response=curl_exec($ch);
+        $data=json_decode($response);
 
 
-        <iframe width="450" height="260" style="border: 1px solid #cccccc;margin-left: 150px;margin-top: 150px;" src="https://thingspeak.com/channels/890855/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&api_key='.$auth_key.'&results=60&type=line&update=15"></iframe>
 
-        <iframe width="450" height="260" style="border: 1px solid #cccccc;margin-left: 100px;margin-top: 150px;" src="https://thingspeak.com/channels/890855/widgets/111517"></iframe>
+        echo'<div style="background-color:black;width: 100%;position: absolute;top: 55px;bottom:0;overflow:hidden">
+        <div style="text-align:center;color:white">
+            <p>Channel id:'.$data->channel->id.'</p>
+            <p>Created At:'.date($data->channel->created_at).'</p>
+            <p>Updated At:'.date($data->channel->updated_at).'</p>
+            <p>Last entry Id:'.($data->channel->last_entry_id).'</p>
+        </div>
+        <iframe width="450" height="260" style="border: 1px solid #cccccc;margin:50px 120px;" src="https://thingspeak.com/channels/'.$ses.'/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+
+        <iframe width="450" height="260" style="border: 1px solid #cccccc;margin:50px 100px;" src="https://thingspeak.com/channels/'.$ses.'/widgets/111517"></iframe>
+
+    </div>';   
+    }
+    else
+    {
+        echo'<div style="background-color:gray;width: 100%;position: absolute;top: 55px;bottom:0;overflow:hidden;text-align:center;color:white">
 
 
-    </div>
+            <div class="caption">
+            <span class="border">"You Don\'t Have Any Device Set"</span>
+            </div>
+
+        
+
+
+    </div>';
+
+    }
+
+    ?>
 
 
 
