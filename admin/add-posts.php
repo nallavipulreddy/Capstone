@@ -1,22 +1,24 @@
 <?php
 session_start();
 include'dbconnection.php';
-// checking session is valid for not 
+//Checking session is valid or not
 if (strlen($_SESSION['id']==0)) {
   header('location:logout.php');
   } else{
 
-// for deleting user
-if(isset($_GET['id']))
+// for adding posts info    
+if(isset($_POST['add']))
 {
-$adminid=$_GET['id'];
-$msg=mysqli_query($con,"delete from users where id='$adminid'");
-if($msg)
-{
-echo "<script>alert('Data deleted');</script>";
+	$title=$_POST['title'];
+  $link=$_POST['link'];
+  $image=$_POST['image'];
+  $query="INSERT INTO posts(title,link,image) VALUES($title,$link,$image)";
+  $result=mysqli_query($con,$query);
+  $_SESSION['msg']="Post Added Succesfully"; 
 }
-}
-?><!DOCTYPE html>
+?>
+
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -24,13 +26,11 @@ echo "<script>alert('Data deleted');</script>";
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-
-    <title>Admin | Manage Users</title>
+    <title>Admin | Add Posts</title>
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
   </head>
 
   <body>
@@ -40,7 +40,7 @@ echo "<script>alert('Data deleted');</script>";
               <div class="sidebar-toggle-box">
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
-            <a href="#" class="logo"><b>Admin Dashboard</b></a>
+            <a href="manage-users.php" class="logo"><b>Admin Dashboard</b></a>
             <div class="nav notify-row" id="top_menu">
                
                          
@@ -88,63 +88,50 @@ echo "<script>alert('Data deleted');</script>";
                       </a>
                    
                   </li>
-              
                  
               </ul>
           </div>
       </aside>
+      <!...........................................................>
       <section id="main-content">
           <section class="wrapper">
-          	<h3><i class="fa fa-angle-right"></i> Manage Users</h3>
-				<div class="row">
-				
-                  
-	                  
+          	<h3><i class="fa fa-angle-right"></i> Add Post</h3>
+             	
+				<div class="row">  
                   <div class="col-md-12">
                       <div class="content-panel">
-                          <table class="table table-striped table-advance table-hover">
-	                  	  	  <h4><i class="fa fa-angle-right"></i> All User Details </h4>
-	                  	  	  <hr>
-                              <thead>
-                              <tr>
-                                  <th>Sno.</th>
-                                  <th class="hidden-phone">User Name</th>
-                                  <th> Email Id</th>
-                                  <th> Channel Id</th>
-                                  <th> Authentication key</th>
-                                  <th>Reg. Date</th>
-                              </tr>
-                              </thead>
-                              <tbody>
-                              <?php $ret=mysqli_query($con,"select * from users");
-							  $cnt=1;
-							  while($row=mysqli_fetch_array($ret))
-							  {?>
-                              <tr>
-                              <td><?php echo $cnt;?></td>
-                                  <td><?php echo $row['username'];?></td>
-                                  <td><?php echo $row['email'];?></td>
-                                  <td><?php echo $row['channel_id'];?></td>
-                                  <td><?php echo $row['auth_key'];?></td>
-                                  <td><?php echo $row['Date'];?></td>
-                                  <td>
-                                     
-                                     <a href="update-profile.php?uid=<?php echo $row['id'];?>"> 
-                                     <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
-                                     <a href="manage-users.php?id=<?php echo $row['id'];?>"> 
-                                     <button class="btn btn-danger btn-xs" onClick="return confirm('Do you really want to delete');"><i class="fa fa-trash-o "></i></button></a>
-                                  </td>
-                              </tr>
-                              <?php $cnt=$cnt+1; }?>
-                             
-                              </tbody>
-                          </table>
+                      <p align="center" style="color:#F00;"><?php echo $_SESSION['msg'];?><?php echo $_SESSION['msg']="";?></p>
+                           <form class="form-horizontal style-form" name="form1" method="post" action="" onSubmit="return valid();">
+                           <p style="color:#F00"><?php echo $_SESSION['msg'];?><?php echo $_SESSION['msg']="";?></p>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label" style="padding-left:40px;">Post Title </label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" name="title" >
+                              </div>
+                          </div>
+
+                          
+                              <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label" style="padding-left:40px;">link</label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" name="link" >
+                              </div>
+                          </div>
+                          
+                              <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label" style="padding-left:40px;">Image </label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" name="image">
+                              </div>
+                          <div style="margin-left:100px;">
+                          <input type="submit" name="add" value="Publish" class="btn btn-theme"></div>
+                          </form>
                       </div>
                   </div>
               </div>
 		</section>
-      </section
-  ></section>
+        
+      </section></section>
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>

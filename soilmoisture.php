@@ -14,40 +14,62 @@ $auth=$_SESSION['auth_key'];
 <title><?php echo $display;?></title>
 <head>
 <!.......................................................................................................>
-    <link rel="stylesheet" href="css/styles.css">
-    <meta http-equiv="refresh" content="900;url=logout.php" />
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<title>Weather Status</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<meta http-equiv="refresh" content="900;url=logout.php" />
 <style>
-    .tabcontent {
-  color: black;
-  display: none;
-  background-color: beige;
-  padding: 100px 20px;
-  height: 409px;
-}
-.container-block
-{
-    border-radius: 2px;
-    padding: 20px 40px 20px 40px;
-    border-radius: 10px;
-    margin-left: 500px;
-    text-align:center;
-    font-size: 15px;
-    color:white;
-    background-color: black;
-    display: inline-block;
-    border: 1px white solid;
-
-}
-.container-block:hover
-{
-    background-color: orange;
-    color:black;
-}
-.container-block1
-{
-    margin:50px 220px;
-}
+body{
+        color: #fff;
+        background-image: url("https://www.icrisat.org/wp-content/uploads/2019/07/CGIAR-20190627-Article-Hero-Image-001-1180x550.jpg");
+        position: relative;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-height: 100%;
+        font-size: 15px;
+        text-align: center;
+        font-family: 'Roboto', sans-serif;
+    }
+    .signup-form{
+        width: 400px;
+        margin: 30px auto;
+        padding: 30px 0;
+    }
+    .signup-form:hover{
+        background-color: orange;
+        color:black;
+    }
+    .signup-form h2{
+        color: white;
+        margin: 0 0 15px;
+        position: relative;
+        text-align: center;
+    }
+       
+    .signup-form .hint-text{
+        color: white;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    .signup-form{
+        color: white;
+        border-radius: 30px;
+        margin-bottom: 15px;
+        background: black;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .signup-form .form-group{
+        margin-bottom: 20px;
+    }
+            
+    
 </style>
+
 <script>
 /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
 function myFunction() {
@@ -105,24 +127,22 @@ function myFunction() {
 
 
 
-        echo'<div style="background-color:black;width: 100%;position: absolute;top: 55px;bottom:0;overflow:hidden">
-        <div class="container-block">
-            <p><b>Channel id:</b>'.$data->channel->id.'</p>
-            <p>Created At:'.date($data->channel->created_at).'</p>
-            <p>Updated At:'.date($data->channel->updated_at).'</p>
-            <p>Last entry Id:'.($data->channel->last_entry_id).'</p>
-        </div>
-        <div class="container-block1">
-            <iframe width="450" height="260" src="https://thingspeak.com/channels/'.$ses.'/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+        echo'<div class="signup-form"">
+                <div class="form-group">
+                    <p><b>Channel id:</b>'.$data->channel->id.'</p>
+                    <p><b>Created At:</b>'.date($data->channel->created_at).'</p>
+                    <p><b>Updated At:</b>'.date($data->channel->updated_at).'</p>
+                    <p><b>Last entry Id:</b>'.($data->channel->last_entry_id).'</p>
+                </div>
+            </div>
+                    <iframe width="450" height="260" src="https://thingspeak.com/channels/'.$ses.'/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
 
-            <iframe width="450" height="260" src="https://thingspeak.com/channels/'.$ses.'/widgets/111517"></iframe>
-        </div>
-
-    </div>';   
+                    <iframe width="450" height="260" src="https://thingspeak.com/channels/'.$ses.'/widgets/111517"></iframe>
+            ';   
     }
     else
     {
-        echo'<div style="background-color:gray;width: 100%;position: absolute;top: 55px;bottom:0;overflow:hidden;text-align:center;color:white">
+        echo'<div class="signup-form">
 
 
             <div class="caption">

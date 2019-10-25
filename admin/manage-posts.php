@@ -10,7 +10,7 @@ if (strlen($_SESSION['id']==0)) {
 if(isset($_GET['id']))
 {
 $adminid=$_GET['id'];
-$msg=mysqli_query($con,"delete from users where id='$adminid'");
+$msg=mysqli_query($con,"delete from posts where id='$adminid'");
 if($msg)
 {
 echo "<script>alert('Data deleted');</script>";
@@ -25,7 +25,7 @@ echo "<script>alert('Data deleted');</script>";
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>Admin | Manage Users</title>
+    <title>Admin | Manage Posts</title>
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet">
@@ -95,43 +95,37 @@ echo "<script>alert('Data deleted');</script>";
       </aside>
       <section id="main-content">
           <section class="wrapper">
-          	<h3><i class="fa fa-angle-right"></i> Manage Users</h3>
+          	<h3><i class="fa fa-angle-right"></i> Manage Posts</h3>
 				<div class="row">
-				
-                  
-	                  
+				 
                   <div class="col-md-12">
                       <div class="content-panel">
                           <table class="table table-striped table-advance table-hover">
-	                  	  	  <h4><i class="fa fa-angle-right"></i> All User Details </h4>
+	                  	  	  <h4><i class="fa fa-angle-right"></i> All Posts Details </h4>
 	                  	  	  <hr>
                               <thead>
                               <tr>
                                   <th>Sno.</th>
-                                  <th class="hidden-phone">User Name</th>
-                                  <th> Email Id</th>
-                                  <th> Channel Id</th>
-                                  <th> Authentication key</th>
-                                  <th>Reg. Date</th>
+                                  <th class="hidden-phone">Title</th>
+                                  <th> link</th>
+                                  <th>image</th>
+                                  <th>Published.Dt</th>
                               </tr>
                               </thead>
                               <tbody>
-                              <?php $ret=mysqli_query($con,"select * from users");
+                              <?php $ret=mysqli_query($con,"select * from posts");
 							  $cnt=1;
 							  while($row=mysqli_fetch_array($ret))
 							  {?>
                               <tr>
                               <td><?php echo $cnt;?></td>
-                                  <td><?php echo $row['username'];?></td>
-                                  <td><?php echo $row['email'];?></td>
-                                  <td><?php echo $row['channel_id'];?></td>
-                                  <td><?php echo $row['auth_key'];?></td>
-                                  <td><?php echo $row['Date'];?></td>
+                                  <td><?php echo $row['title'];?></td>
+                                  <td><?php echo $row['link'];?></td>
+                                  <td><?php echo $row['image'];?></td>
+                                  <td><?php echo $row['created_at'];?></td>
                                   <td>
                                      
-                                     <a href="update-profile.php?uid=<?php echo $row['id'];?>"> 
-                                     <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
-                                     <a href="manage-users.php?id=<?php echo $row['id'];?>"> 
+                                     <a href="manage-posts.php?id=<?php echo $row['id'];?>"> 
                                      <button class="btn btn-danger btn-xs" onClick="return confirm('Do you really want to delete');"><i class="fa fa-trash-o "></i></button></a>
                                   </td>
                               </tr>

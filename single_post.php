@@ -38,9 +38,16 @@ function myFunction() {
 
 </head>
 <body>
-
-<div >
-    <div class="topnav">
+<!..............................................................................>
+    <div class="container">
+      
+<title>LifeBlog | Home </title>
+</head>
+<body>
+    <!-- container - wraps whole page -->
+    <div class="container">
+        <!-- navbar -->
+        <div class="topnav">
         <table width="100%">
             <tr>
                 <td>
@@ -64,62 +71,51 @@ function myFunction() {
             </tr>
         </table>
     </div>
-</div>
-
-<!..............................................................................>
-    <div class="container">
-      
-<title>LifeBlog | Home </title>
-</head>
-<body>
-    <!-- container - wraps whole page -->
-    <div class="container">
-        <!-- navbar -->
-<div class="banner">
-    <div class="welcome_msg">
-        <h1>Today's Inspiration</h1>
-        <p> 
-            One day your life <br> 
-            will flash before your eyes. <br> 
-            Make sure it's worth watching. <br>
-            <span>~ Gerard Way</span>
-        </p>
-    </div>
-</div>
-        <!-- Page content -->
-        <div class="content">
-            <h2 class="content-title">Recent Articles</h2>
-            <hr style="border: 3px solid black;
-  border-radius: 5px;">
-            <!-- more content still to come here ... -->
-<?php
-    $sql = "SELECT * FROM posts";
+    <?php
+    $sql = "SELECT * FROM posts WHERE published=true";
     $result = mysqli_query($conn, $sql);
 
     // fetch all posts as an associative array called $posts
     $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
-   <?php foreach ($posts as $post): ?>
-    <div class="post" style="margin-left: 0px;">
-        <img src="<?php echo $post['image'];?>" class="post_image" alt="Image not loaded">
-        <a href="<?php echo $post['link'];?>" target="_blank">
-            <div class="post_info">
-                <p><?php echo $post['title'] ?></p>
-                <div class="info">
-                    <span><?php echo date("F j, Y ", strtotime($post["created_at"])); ?></span>
-                    <span class="read_more">Read more...</span>
+    <div class="content" >
+        <!-- Page wrapper -->
+        <div class="post-wrapper">
+            <!-- full post div -->
+            <div class="full-post-div">
+                <h2 class="post-title"><?php echo $posts['title']; ?></h2>
+                <div class="post-body-div">
+                    <?php echo html_entity_decode($posts['body']); ?>
                 </div>
             </div>
-        </a>
-    </div>
-<?php endforeach ?>
+            <!-- // full post div -->
+            
+            <!-- comments section -->
+            <!--  coming soon ...  -->
         </div>
-        <!-- // Page content -->
+        <!-- // Page wrapper -->
 
-        <!-- footer -->
-
+        <!-- post sidebar -->
+        <div class="post-sidebar">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Topics</h2>
+                </div>
+                <div class="card-content">
+                    <?php foreach ($posts as $post): ?>
+                        <a 
+                            href="<?php echo BASE_URL . 'filtered_posts.php?topic=' . $post['id'] ?>">
+                            <?php echo $post['name']; ?>
+                        </a> 
+                    <?php endforeach ?>
+                </div>
+            </div>
+        </div>
+        <!-- // post sidebar -->
     </div>
-
+</div>
+<!-- // content -->
+    </div>
 <!..............................................................................>
 
 </body>

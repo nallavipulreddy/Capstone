@@ -1,22 +1,24 @@
 <?php
 session_start();
 include'dbconnection.php';
-// checking session is valid for not 
+//Checking session is valid or not
 if (strlen($_SESSION['id']==0)) {
   header('location:logout.php');
   } else{
 
-// for deleting user
-if(isset($_GET['id']))
+// for updating user info    
+if(isset($_POST['Submit']))
 {
-$adminid=$_GET['id'];
-$msg=mysqli_query($con,"delete from users where id='$adminid'");
-if($msg)
-{
-echo "<script>alert('Data deleted');</script>";
+	$username=$_POST['username'];
+  $auth_key=$_POST['auth_key'];
+  $channel_id=$_POST['channel_id'];
+  $uid=intval($_GET['uid']);
+$query=mysqli_query($con,"update users set username='$username',auth_key='$auth_key',channel_id='$channel_id' where id='$uid'");
+$_SESSION['msg']="Profile Updated successfully";
 }
-}
-?><!DOCTYPE html>
+?>
+
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -24,13 +26,11 @@ echo "<script>alert('Data deleted');</script>";
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-
-    <title>Admin | Manage Users</title>
+    <title>Admin | Update Posts</title>
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
   </head>
 
   <body>
@@ -40,7 +40,7 @@ echo "<script>alert('Data deleted');</script>";
               <div class="sidebar-toggle-box">
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
-            <a href="#" class="logo"><b>Admin Dashboard</b></a>
+            <a href="manage-users.php" class="logo"><b>Admin Dashboard</b></a>
             <div class="nav notify-row" id="top_menu">
                
                          
@@ -88,63 +88,68 @@ echo "<script>alert('Data deleted');</script>";
                       </a>
                    
                   </li>
-              
                  
               </ul>
           </div>
       </aside>
-      <section id="main-content">
+      <?php $ret=mysqli_query($con,"select * from users where id='".$_GET['uid']."'");
+	  while($row=mysqli_fetch_array($ret))
+	  
+	         <section id="main-content">
           <section class="wrapper">
-          	<h3><i class="fa fa-angle-right"></i> Manage Users</h3>
+          	<h3><i class="fa fa-angle-right"></i> <?php echo $row['title'];?>'s Information</h3>
+             	
 				<div class="row">
 				
                   
 	                  
                   <div class="col-md-12">
                       <div class="content-panel">
-                          <table class="table table-striped table-advance table-hover">
-	                  	  	  <h4><i class="fa fa-angle-right"></i> All User Details </h4>
-	                  	  	  <hr>
-                              <thead>
-                              <tr>
-                                  <th>Sno.</th>
-                                  <th class="hidden-phone">User Name</th>
-                                  <th> Email Id</th>
-                                  <th> Channel Id</th>
-                                  <th> Authentication key</th>
-                                  <th>Reg. Date</th>
-                              </tr>
-                              </thead>
-                              <tbody>
-                              <?php $ret=mysqli_query($con,"select * from users");
-							  $cnt=1;
-							  while($row=mysqli_fetch_array($ret))
-							  {?>
-                              <tr>
-                              <td><?php echo $cnt;?></td>
-                                  <td><?php echo $row['username'];?></td>
-                                  <td><?php echo $row['email'];?></td>
-                                  <td><?php echo $row['channel_id'];?></td>
-                                  <td><?php echo $row['auth_key'];?></td>
-                                  <td><?php echo $row['Date'];?></td>
-                                  <td>
-                                     
-                                     <a href="update-profile.php?uid=<?php echo $row['id'];?>"> 
-                                     <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
-                                     <a href="manage-users.php?id=<?php echo $row['id'];?>"> 
-                                     <button class="btn btn-danger btn-xs" onClick="return confirm('Do you really want to delete');"><i class="fa fa-trash-o "></i></button></a>
-                                  </td>
-                              </tr>
-                              <?php $cnt=$cnt+1; }?>
-                             
-                              </tbody>
-                          </table>
+                      <p align="center" style="color:#F00;"><?php echo $_SESSION['msg'];?><?php echo $_SESSION['msg']="";?></p>
+                           <form class="form-horizontal style-form" name="form1" method="post" action="" onSubmit="return valid();">
+                           <p style="color:#F00"><?php echo $_SESSION['msg'];?><?php echo $_SESSION['msg']="";?></p>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label" style="padding-left:40px;">Post Title </label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" name="title" value="<?php echo $row['title'];?>" >
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label" style="padding-left:40px;">Slug </label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" name="slug" value="<?php echo $row['slug'];?>">
+                              </div>
+                          </div>
+                          
+                              <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label" style="padding-left:40px;">BODY</label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" name="body" value="<?php echo $row['body'];?>" >
+                              </div>
+                          </div>
+                          
+                              <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label" style="padding-left:40px;">Image </label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" name="email" value="<?php echo $row['image'];?>"read only>
+                              </div>
+                          </div>
+                            <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label" style="padding-left:40px;">Publish </label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" name="regdate">
+                              </div>
+                          </div>
+                          <div style="margin-left:100px;">
+                          <input type="submit" name="update" value="update" class="btn btn-theme"></div>
+                          </form>
                       </div>
                   </div>
               </div>
 		</section>
-      </section
-  ></section>
+        <?php } ?>
+      </section></section>
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>

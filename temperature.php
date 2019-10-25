@@ -11,36 +11,48 @@ $display=$_SESSION['username'];
 <title><?php echo $display;?></title>
 <head>
 <!.......................................................................................................>
-    <link rel="stylesheet" href="css/styles.css">
-    <meta http-equiv="refresh" content="900;url=logout.php" />
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<title>Weather Status</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<meta http-equiv="refresh" content="900;url=logout.php" />
 <style>
-    .tabcontent {
-  color: black;
-  display: none;
-  background-color: beige;
-  padding: 100px 20px;
-  height: 409px;
-}
-.container-block
-{
-    border-radius: 100px;
-    padding: 10px 40px 20px 40px;
-    margin: 50px 350px;
-    text-align:center;
-    width:550px;
-    color:white;
-    font-family: ;
-    font-size: 15px;
-    background-color: black;
-    display: inline-block;
-    border: 1px white solid;
-
-}
-.container-block:hover
-{
- background-color: orange;
- color:black;
-}
+body{
+        color: #fff;
+        background-image: url("https://www.icrisat.org/wp-content/uploads/2019/05/Girnar-4-ICGV-15083-1180x550.jpg");
+        position: relative;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-height: 100%;
+        font-size: 15px;
+        text-align: center;
+        font-family: 'Roboto', sans-serif;
+    }
+    .signup-form{
+        width: 450px;
+        margin: 30px auto;
+        padding: 30px 0;
+    }
+    .signup-form:hover{
+        background-color: orange;
+        color:black;
+    }
+    .signup-form{
+        color: white;
+        border-radius: 30px;
+        margin-bottom: 15px;
+        background: black;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .signup-form .form-group{
+        margin-bottom: 20px;
+    }
+            
+    
 </style>
 <script>
 /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
@@ -59,27 +71,26 @@ function myFunction() {
 <body>
 
 <div>
-    <div class="topnav">
+    <div class="topnav" style="text-decoration: none;">
         <table width="100%">
-            <tr>
+            <tr style="text-decoration: none;">
                 <td>
-                <a href="kc.php">Knowledge-Center</a>
+                <a href="kc.php"style="text-decoration: none;">Knowledge-Center</a>
                 </td><td>
-                <a href="soilmoisture.php">Soil moisture</a>
+                <a href="soilmoisture.php"style="text-decoration: none;">Soil moisture</a>
                 </td><td>
-                <a href="temperature.php">Temperature</a>
+                <a href="temperature.php"style="text-decoration: none;">Temperature</a>
                 </td><td>
-                <a href="pump.php">Water Pump</a>
+                <a href="pump.php"style="text-decoration: none;">Water Pump</a>
                 </td>
                 <td class="dropdown">
                 <a class="dropbtn">Account</a>
                     <div class="dropdown-content">
-                        <a href="main.php"><?php echo $display;?></a>
-                        <a href="#">Help</a>
-                        <a href="logout.php">Logout</a>
+                        <a href="main.php"style="text-decoration: none;"><?php echo $display;?></a>
+                        <a href="#"style="text-decoration: none;">Help</a>
+                        <a href="logout.php"style="text-decoration: none;">Logout</a>
                     </div>
                 </td>
-                
             </tr>
         </table>
     </div>
@@ -101,19 +112,24 @@ function myFunction() {
 
 
     ?>
-    <div style="font-family: Arial;background-color:black;width: 100%;position: absolute;top: 55px;bottom:0;overflow:hidden">
-        <div class="container-block">
-            <br>
-            <h1><?php echo $data->name;?> Weather Status</h1>
-            <p><?php echo date("l g",$currentTime)?></p>
-            <p><?php echo date("jS F, Y",$currentTime)?></p>
-            <p><?php echo ucwords($data->weather[0]->description)?></p>
-            <p>Minimum Temperature: <?php echo $data->main->temp_min;?>&deg;C</p>
-            <p>Maximum Temperature: <?php echo $data->main->temp_min;?>&deg;C</p>
-            <p>Humidity: <?php echo $data->main->humidity;?>%</p>
-            <p>Pressure: <?php echo $data->main->pressure;?>%</p>
-            <p>Wind Speed: <?php echo $data->wind->speed;?>%</p>
-        </div>
-    </div>;
+    
+<div class="signup-form">
+        <div class="form-group">
+                <h2>Weather Status</h2>
+                <p><b>Location:</b> <?php echo $data->name;?></p>
+                <p><b><?php echo date("l g:i a",$currentTime)?></b></p>
+                <p><b><?php echo date("jS F, Y",$currentTime)?></b></p>
+                <p><b>Cloudiness:</b><?php echo ucwords($data->weather[0]->description)?></p>
+                <p><b>Minimum Temperature:</b> <?php echo $data->main->temp_min;?>&deg;C</p>
+                <p><b>Maximum Temperature:</b> <?php echo $data->main->temp_min;?>&deg;C</p>
+                <p><b>Humidity:</b> <?php echo $data->main->humidity;?>%</p>
+                <p><b>Pressure:</b> <?php echo $data->main->pressure;?></p>
+                <p><b>Wind Speed:</b> <?php echo $data->wind->speed;?>%</p>
+        </div>    
+</div>
+
+
+
+
 </body>
 </html>

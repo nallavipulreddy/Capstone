@@ -75,7 +75,20 @@ $_SESSION['msg']="Profile Updated successfully";
                       </a>
                    
                   </li>
-              
+                  <li class="sub-menu">
+                      <a href="manage-posts.php" >
+                          <i class="fa fa-users"></i>
+                          <span>Manage Posts</span>
+                      </a>
+                   
+                  </li>
+                  <li class="sub-menu">
+                      <a href="add-posts.php" >
+                          <i class="fa fa-users"></i>
+                          <span>add Posts</span>
+                      </a>
+                   
+                  </li>
                  
               </ul>
           </div>
