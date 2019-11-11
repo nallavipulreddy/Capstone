@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 include'dbconnection.php';
 //Checking session is valid or not
@@ -84,7 +85,14 @@ if(isset($_POST['add']))
                   <li class="sub-menu">
                       <a href="add-posts.php" >
                           <i class="fa fa-users"></i>
-                          <span>add Posts</span>
+                          <span>Add Posts</span>
+                      </a>
+                   
+                  </li>
+                  <li class="sub-menu">
+                      <a href="contact.php" >
+                          <i class="fa fa-users"></i>
+                          <span>Queries</span>
                       </a>
                    
                   </li>

@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 include'dbconnection.php';
 // checking session is valid for not 
@@ -84,7 +85,14 @@ echo "<script>alert('Data deleted');</script>";
                   <li class="sub-menu">
                       <a href="add-posts.php" >
                           <i class="fa fa-users"></i>
-                          <span>add Posts</span>
+                          <span>Add Posts</span>
+                      </a>
+                   
+                  </li>
+                  <li class="sub-menu">
+                      <a href="contact.php" >
+                          <i class="fa fa-users"></i>
+                          <span>Queries</span>
                       </a>
                    
                   </li>

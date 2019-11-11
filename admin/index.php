@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 include("dbconnection.php");
 if(isset($_POST['login']))

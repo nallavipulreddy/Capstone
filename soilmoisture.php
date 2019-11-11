@@ -23,7 +23,7 @@ $auth=$_SESSION['auth_key'];
 <style>
 body{
         color: #fff;
-        background-image: url("https://www.icrisat.org/wp-content/uploads/2019/07/CGIAR-20190627-Article-Hero-Image-001-1180x550.jpg");
+        background-image: url("images/5.jpg");
         position: relative;
         background-attachment: fixed;
         background-position: center;
@@ -96,8 +96,6 @@ function myFunction() {
                 <a href="soilmoisture.php">Soil moisture</a>
                 </td><td>
                 <a href="temperature.php">Temperature</a>
-                </td><td>
-                <a href="pump.php">Water Pump</a>
                 </td>
                 <td class="dropdown">
                 <a class="dropbtn">Account</a>
@@ -142,17 +140,9 @@ function myFunction() {
     }
     else
     {
-        echo'<div class="signup-form">
-
-
-            <div class="caption">
+        echo'<div class="caption">
             <span class="border">"You Don\'t Have Any Device Set"</span>
-            </div>
-
-        
-
-
-    </div>';
+            </div>';
 
     }
 

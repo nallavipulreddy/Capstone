@@ -88,6 +88,13 @@ $_SESSION['msg']="Profile Updated successfully";
                       </a>
                    
                   </li>
+                  <li class="sub-menu">
+                      <a href="contact.php" >
+                          <i class="fa fa-users"></i>
+                          <span>Queries</span>
+                      </a>
+                   
+                  </li>
                  
               </ul>
           </div>

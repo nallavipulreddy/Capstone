@@ -20,7 +20,7 @@ $display=$_SESSION['username'];
 <style>
 body{
         color: #fff;
-        background-image: url("https://www.icrisat.org/wp-content/uploads/2019/05/Girnar-4-ICGV-15083-1180x550.jpg");
+        background-image: url("images/7.jpg");
         position: relative;
         background-attachment: fixed;
         background-position: center;
@@ -80,8 +80,6 @@ function myFunction() {
                 <a href="soilmoisture.php"style="text-decoration: none;">Soil moisture</a>
                 </td><td>
                 <a href="temperature.php"style="text-decoration: none;">Temperature</a>
-                </td><td>
-                <a href="pump.php"style="text-decoration: none;">Water Pump</a>
                 </td>
                 <td class="dropdown">
                 <a class="dropbtn">Account</a>

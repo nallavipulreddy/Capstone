@@ -1,4 +1,5 @@
-<?php include 'dbh.php'?>
+<?php include 'dbh.php'
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +19,7 @@
 <style type="text/css">
 	body{
 		color: #fff;
-		background-image: url("https://images3.alphacoders.com/427/thumb-1920-42785.jpg");
+		background-image: url("images/3.jpg");
 		position: relative;
     	background-attachment: fixed;
     	background-position: center;
@@ -141,10 +142,10 @@
 			<span id="username-availability-status" style="font-size:12px;"></span>        	
         </div>
         <div class="form-group">
-        	<input type="email" class="form-control" name="email" placeholder="Email" required="required">
+        	<input type="email" class="form-control" name="email" placeholder="Email" required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
         </div>
 		<div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+            <input type="password" class="form-control" name="password" placeholder="Password" required="required"pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
         </div>
 		<div class="form-group">
             <input type="password" class="form-control" name="passwordConf" placeholder="Confirm Password" required="required">

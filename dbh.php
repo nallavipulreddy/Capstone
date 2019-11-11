@@ -59,7 +59,7 @@ if (isset($_POST['submit'])) {
             $ms.="<html></body><div><div>Dear $username,</div></br></br>";
             $ms.="<div style='padding-top:8px;'>Please click The following link For verifying and activation of your account</div>
             <div style='padding-top:10px;'><a href='https://smarttyfarm.000webhostapp.com/email_Verification.php?code=$token'>Click Here</a></div>
-            <div style='padding-top:4px;'>Powered by <a href='CodeWithSuneja.com'>CodeWithSuneja.com</a></div></div>
+            <div style='padding-top:4px;'>Powered by <a href='https://smarttyfarm.000webhostapp.com'>smarttyfarm</a></div></div>
             </body></html>";
             mail($to,$subject,$ms,$head);
 
@@ -126,3 +126,5 @@ if (isset($_POST['login'])) {
             }
     }
 }
+//contact us
+

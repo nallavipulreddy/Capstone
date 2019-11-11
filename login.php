@@ -21,7 +21,7 @@
 <style type="text/css">
 	body{
 		color: #fff;
-		background-image: url("https://www.icrisat.org/wp-content/uploads/2019/09/Cowpea-field-trails-Burkina-Faso-copy-1180x550.jpg");
+		background-image: url("images/2.jpg");
 		position: relative;
     	background-attachment: fixed;
     	background-position: center;

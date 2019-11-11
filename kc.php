@@ -22,6 +22,19 @@ $display=$_SESSION['username'];
   padding: 100px 20px;
   height: 409px;
 }
+    body{
+        color: #fff;
+        background-image: url("images/6.jpg");
+        position: relative;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-height: 100%;
+        
+        font-family: 'Roboto', sans-serif;
+    }
+
 </style>
 <script>
 /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
@@ -49,8 +62,6 @@ function myFunction() {
                 <a href="soilmoisture.php">Soil moisture</a>
                 </td><td>
                 <a href="temperature.php">Temperature</a>
-                </td><td>
-                <a href="pump.php">Water Pump</a>
                 </td>
                 <td class="dropdown">
                 <a class="dropbtn">Account</a>
@@ -75,22 +86,9 @@ function myFunction() {
     <!-- container - wraps whole page -->
     <div class="container">
         <!-- navbar -->
-<div class="banner">
-    <div class="welcome_msg">
-        <h1>Today's Inspiration</h1>
-        <p> 
-            One day your life <br> 
-            will flash before your eyes. <br> 
-            Make sure it's worth watching. <br>
-            <span>~ Gerard Way</span>
-        </p>
-    </div>
-</div>
         <!-- Page content -->
         <div class="content">
             <h2 class="content-title">Recent Articles</h2>
-            <hr style="border: 3px solid black;
-  border-radius: 5px;">
             <!-- more content still to come here ... -->
 <?php
     $sql = "SELECT * FROM posts";

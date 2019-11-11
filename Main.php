@@ -67,8 +67,6 @@ document.getElementById("defaultOpen").click();
                 <a href="soilmoisture.php">Soil moisture</a>
                 </td><td>
                 <a href="temperature.php">Temperature</a>
-                </td><td>
-                <a href="pump.php">Water Pump</a>
                 </td>
                 <td class="dropdown">
                 <a class="dropbtn">Account</a>
