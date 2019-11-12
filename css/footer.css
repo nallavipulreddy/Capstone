@@ -35,8 +35,13 @@ header span{
 /* The footer is fixed to the bottom of the page */
  
 footer{
-    position: fixed;
-    bottom: 0;
+    background: url(../images/footer_pattern.png)center repeat;
+    padding: 90px 0;
+    z-index: 1;
+    position: relative;
+
+    box-sizing: border-box;
+    padding: 50px 50px 10px 30px;
 }
  
 @media (max-height:700px){
@@ -45,20 +50,7 @@ footer{
 }
  
  
-.footer-distributed{
-    background-color: #2c292f;
-    box-sizing: border-box;
-    width: 100%;
-    text-align: left;
-    font: bold 16px sans-serif;
-    padding: 50px 50px 10px 30px;
-    margin-top: 80px;
-    position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
- 
+
 .footer-distributed .footer-left,
 .footer-distributed .footer-center,
 .footer-distributed .footer-right{

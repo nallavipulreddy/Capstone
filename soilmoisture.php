@@ -100,7 +100,7 @@ function myFunction() {
                 <td class="dropdown">
                 <a class="dropbtn">Account</a>
                     <div class="dropdown-content">
-                        <a href="main.php"><?php echo $display;?></a>
+                        <a href="profile.php"><?php echo $display;?></a>
                         <a href="#">Help</a>
                         <a href="logout.php">Logout</a>
                     </div>

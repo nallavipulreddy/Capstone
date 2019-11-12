@@ -1,4 +1,75 @@
-<?php include 'dbh.php'
+<?php include 'dbh.php';
+
+if (isset($_POST['submit'])) {
+    if (empty($_POST['username'])) {
+        $errors['username'] = 'Username required';
+    }
+    if (empty($_POST['email'])) {
+        $errors['email'] = 'Email required';
+    }
+    if (empty($_POST['password'])) {
+        $errors['password'] = 'Password required';
+    }
+    if (isset($_POST['password']) && $_POST['password'] !== $_POST['passwordConf']) {
+        $errors['passwordConf'] = 'The two passwords do not match';
+    }
+
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $token = bin2hex(random_bytes(50)); // generate unique token
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); //encrypt password
+    $channel_id=0;
+    $auth_key=0;
+
+    // Check if email already exists
+    $sql = "SELECT * FROM users WHERE email='$email' LIMIT 1";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        $errors['email'] = "Email already exists";
+    }
+    if (count($errors) === 0) {
+       $query = "INSERT INTO users SET username=?, email=?, token=?, password=?,channel_id=?,
+    auth_key=?;";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('ssssss', $username, $email, $token, $password,$channel_id,
+    $auth_key);
+        $result = $stmt->execute();
+
+        if ($result) {
+            $user_id = $stmt->insert_id;
+            $stmt->close();
+
+            // TO DO: send verification email to user
+            // sendVerificationEmail($email, $token);
+
+            $to=$email;
+            $msg= "Thanks for new Registration.";   
+            $subject="Email verification (smarttyfarm.com)";
+            $head .= "MIME-Version: 1.0"."\r\n";
+            $head .= 'Content-type: text/html; charset=iso-8859-1'."\r\n";
+            $head .= 'From:Smarttyfarm | admin <vipulreddy00@gmail.com>'."\r\n";
+                
+            $ms.="<html></body><div><div>Dear $username,</div></br></br>";
+            $ms.="<div style='padding-top:8px;'>Please click The following link For verifying and activation of your account</div>
+            <div style='padding-top:10px;'><a href='https://smarttyfarm.000webhostapp.com/email_Verification.php?code=$token'>Click Here</a></div>
+            <div style='padding-top:4px;'>Powered by <a href='https://smarttyfarm.000webhostapp.com'>smarttyfarm</a></div></div>
+            </body></html>";
+            mail($to,$subject,$ms,$head);
+
+
+            $_SESSION['id'] = $user_id;
+            $_SESSION['username'] = $username;
+            $_SESSION['email'] = $email;
+            $_SESSION['verified'] = false;
+            header("location: login.php");
+        } else {
+            $_SESSION['error_msg'] = "Database error: Could not register user";
+        }
+
+    }
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -114,6 +185,7 @@
 </style>
 </head>
 <body>
+
 <div class="topnav">
         <table width="100%">
             <tr>
@@ -150,9 +222,6 @@
 		<div class="form-group">
             <input type="password" class="form-control" name="passwordConf" placeholder="Confirm Password" required="required">
         </div>        
-        <div class="form-group">
-			<label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
-		</div>
 		<div class="form-group">
             <button type="submit" name="submit" class="btn btn-success btn-lg btn-block">Sign Up</button>
         </div>

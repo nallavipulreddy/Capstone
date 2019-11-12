@@ -1,5 +1,5 @@
 <?php include 'dbh.php';
-
+error_reporting(0);
 if (isset($_POST['post'])) {
     if (empty($_POST['username'])) {
         $errors['username'] = 'Username required';
@@ -145,8 +145,8 @@ if (isset($_POST['post'])) {
         <div class="form-group">
             <input type="email" class="form-control" name="email" placeholder="Email" required="required">
         </div>
-        <div style="margin-bottom: 20px">
-            <textarea id="message" name="text" placeholder="Your Query" required></textarea>
+        <div style="margin-bottom: 20px;">
+            <textarea id="message" name="text" placeholder="Your Query" required style="width: auto;"></textarea>
         </div>
 
         <div class="form-group">
@@ -155,4 +155,5 @@ if (isset($_POST['post'])) {
 </div>
 
 </body>
+<?php include_once('footer.php');?>
 </html>                          

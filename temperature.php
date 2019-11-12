@@ -84,7 +84,7 @@ function myFunction() {
                 <td class="dropdown">
                 <a class="dropbtn">Account</a>
                     <div class="dropdown-content">
-                        <a href="main.php"style="text-decoration: none;"><?php echo $display;?></a>
+                        <a href="profile.php"style="text-decoration: none;"><?php echo $display;?></a>
                         <a href="#"style="text-decoration: none;">Help</a>
                         <a href="logout.php"style="text-decoration: none;">Logout</a>
                     </div>
