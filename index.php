@@ -50,7 +50,7 @@ function myFunction() {
         </table>
     </div>
     <div class="caption">
-      <span class="border">"Home Page"</span>
+      <span class="border">"Capstone Project"</span>
     </div>
     <div>
         
